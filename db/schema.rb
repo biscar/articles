@@ -23,13 +23,17 @@ ActiveRecord::Schema.define(version: 20200205165055) do
 
   create_table "articles", force: :cascade do |t|
     t.string "name"
+    t.bigint "article_type_id"
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["article_type_id"], name: "index_articles_on_article_type_id"
   end
 
   create_table "stories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "story_articles", force: :cascade do |t|

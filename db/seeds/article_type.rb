@@ -2,9 +2,9 @@ module Seeds
   class ArticleType
     TYPES = [
       ['Blog post', 'blog_post'],
-      ['Facebook post', 'facebook post'],
+      ['Facebook post', 'facebook_post'],
       ['Tweet', 'tweet'],
-      ].freeze
+    ].freeze
 
     def self.import_data
       Ar::ArticleType.import([:name, :lookup_code],
@@ -13,4 +13,3 @@ module Seeds
 
   end
 end
-
