@@ -4,15 +4,25 @@ import { observer } from "mobx-react";
 
 @observer
 class ArticleHeadColumn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
-    const value = this.props.value;
+    const label = this.props.label;
     return (
-        <th scope="col">{value}</th>
+      <th scope="col">
+        <a onClick={this.onChange} href="#" >{label}</a>
+      </th>
     );
   }
 
-  onNewTodo = () => {
-    this.props.store.addTodo(prompt('Enter a new todo:','coffee plz'));
+  onChange = () => {
+    const order = this.state.value === 'asc' ? 'desc' : 'asc';
+    this.setState({ value: order});
+
+    this.props.store.sortTable(this.props.column, order);
   }
 }
 

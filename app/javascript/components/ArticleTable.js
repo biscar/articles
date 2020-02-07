@@ -13,7 +13,7 @@ class ArticleTable extends React.Component {
       <div>
         <table className="table table-bordered">
           <thead>
-          <ArticleHead />
+            <ArticleHead store={ store }/>
           </thead>
           <tbody>
           { store.articles.map(

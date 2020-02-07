@@ -96,6 +96,13 @@ class ObservableArticlesStore {
     });
   }
 
+  sortTable(field, sort){
+    this.tableStore.sort_field = field;
+    this.tableStore.sort_value = sort;
+
+    this.searchArticles();
+  }
+
   searchArticles() {
     $.ajax({
       url: `/api/v1/article`,

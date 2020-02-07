@@ -33,7 +33,7 @@ module Api
       end
 
       def permitted_index_params(params)
-        params.permit(:search_field, :search).to_h.with_indifferent_access
+        params.permit(:search_field, :search, :sort_field, :sort_value).to_h.with_indifferent_access
       end
 
     end

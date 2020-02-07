@@ -5,16 +5,20 @@ import ArticleHeadColumn from "./ArticleHeadColumn";
 
 @observer
 class ArticleHead extends React.Component {
+
   render() {
-    //const store = this.props.store;
+    const store = this.props.store;
+
     return (
-        <tr>
-          <ArticleHeadColumn value={'Story'}/>
-          <ArticleHeadColumn value={'Name'}/>
-          <ArticleHeadColumn value={'Text'}/>
-          <ArticleHeadColumn value={'Type'}/>
-          <ArticleHeadColumn value={'Actions'}/>
-        </tr>
+      <tr>
+        <ArticleHeadColumn store={store} label={'Story'} column={'story'}/>
+        <ArticleHeadColumn store={store} label={'Name'} column={'name'}/>
+        <ArticleHeadColumn store={store} label={'Text'} column={'text'}/>
+        <ArticleHeadColumn store={store} label={'Type'} column={'type'}/>
+        <th scope="col">
+          Actions
+        </th>
+      </tr>
     );
   };
 }

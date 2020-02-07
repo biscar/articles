@@ -6,7 +6,7 @@ module Articles
 
     def add_search_conditions(search_field, search_text)
       if search_text && search_field
-        articles.where("#{search_field} LIKE ?", "%#{search_text}%")
+        articles.where("articles.#{search_field} LIKE ?", "%#{search_text}%")
       else
         articles
       end
