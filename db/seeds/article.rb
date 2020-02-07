@@ -17,12 +17,14 @@ module Seeds
 
     def self.import_data
       types = Ar::ArticleType.all.to_a
+      stories = Ar::Story.all.to_a
 
       rand(0..15).times do
         article = Ar::Article.new
         article.article_type = types.sample
         article.name = NAMES.sample
         article.text = TEXTS.sample
+        article.story = stories.sample
         article.save!
       end
     end

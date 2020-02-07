@@ -5,6 +5,7 @@ class CreateArticlesTable < ActiveRecord::Migration[5.1]
     create_table TABLE_NAME do |t|
       t.string :name
       t.belongs_to :article_type, index: true
+      t.belongs_to :story, index: true
       t.text :text
 
       t.timestamps
