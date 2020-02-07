@@ -95,6 +95,20 @@ class ObservableArticlesStore {
       }
     });
   }
+
+  searchArticles(search_field, text) {
+    $.ajax({
+      url: `/api/v1/article`,
+      data: {
+        "search_field": search_field,
+        "search": text
+      },
+      type: 'GET',
+      success: (data) => {
+        this.articles = data.data.articles;
+      }
+    });
+  }
 }
 
 export default ObservableArticlesStore;

@@ -3,13 +3,13 @@ module Api
     class ArticleController < ApplicationController
 
       def index
-        json = Articles::Retriever.new.retrieve_json
+        json = Articles::Retriever.new(permitted_index_params(params)).retrieve_json
 
         render json: { status: 200, data: json }
       end
 
       def destroy
-        #Articles::Destroyer.new(params[:id]).destroy
+        Articles::Destroyer.new(params[:id]).destroy
 
         render json: { status: 200 }
       end
@@ -30,6 +30,10 @@ module Api
 
       def permitted_update_params(params)
         params.permit(:name, :text, :type_code, :story_id).to_h.with_indifferent_access
+      end
+
+      def permitted_index_params(params)
+        params.permit(:search_field, :search).to_h.with_indifferent_access
       end
 
     end
