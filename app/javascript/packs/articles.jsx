@@ -3,13 +3,15 @@ import ReactDOM, { render } from "react-dom";
 
 import ArticleTable from "../components/ArticleTable"
 import ObservableArticlesStore from "../components/ObservableArticlesStore"
+import ObservableTableStore from "../components/ObservableTableStore"
 import ArticleFinder from "../components/ArticleFinder";
 
+const tableStore = new ObservableTableStore();
+const store = new ObservableArticlesStore(tableStore);
 
-const store = new ObservableArticlesStore();
 
 ReactDOM.render(
-  <ArticleFinder store={ store }/>,
+  <ArticleFinder store={ store } tableStore={ tableStore }/>,
   document.getElementById('article_finder')
 );
 

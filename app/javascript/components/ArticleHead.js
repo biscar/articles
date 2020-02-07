@@ -16,11 +16,7 @@ class ArticleHead extends React.Component {
           <ArticleHeadColumn value={'Actions'}/>
         </tr>
     );
-  }
-
-  onNewTodo = () => {
-    this.props.store.addTodo(prompt('Enter a new todo:','coffee plz'));
-  }
+  };
 }
 
 export default ArticleHead;

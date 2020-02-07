@@ -5,9 +5,10 @@ import MobX, { observable, action, computed, autorun } from "mobx";
 class ObservableArticlesStore {
   @observable articles = [];
 
-  constructor() {
+  constructor(tableStore) {
     this.article_types = {};
     this.stories = {};
+    this.tableStore = tableStore;
 
     autorun(() => {
       this.loadArticles();
@@ -40,8 +41,11 @@ class ObservableArticlesStore {
   }
 
   newArticle() {
-    this.articles.push({editing: true, story_id: this.defaultStory(),
-      type_code: this.defaultArticleType()});
+    this.articles.push({
+      editing: true,
+      story_id: this.defaultStory(),
+      type_code: this.defaultArticleType()
+    });
   }
 
   defaultArticleType() {
@@ -77,11 +81,7 @@ class ObservableArticlesStore {
       type: 'POST',
       data: params,
       success: () =>  {
-        article.name = params.name;
-        article.text = params.text;
-        article.type_code = params.type_code;
-        article.story_id = params.story_id;
-        article.editing = false;
+        this.loadArticles();
       }
     });
   };
@@ -96,12 +96,14 @@ class ObservableArticlesStore {
     });
   }
 
-  searchArticles(search_field, text) {
+  searchArticles() {
     $.ajax({
       url: `/api/v1/article`,
       data: {
-        "search_field": search_field,
-        "search": text
+        "search_field": this.tableStore.search_field,
+        "search": this.tableStore.search_value,
+        "sort_field": this.tableStore.sort_field,
+        "sort_value": this.tableStore.sort_value
       },
       type: 'GET',
       success: (data) => {
