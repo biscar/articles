@@ -10,22 +10,25 @@ class ArticleTable extends React.Component {
     const store = this.props.store;
 
     return (
-      <table className="table table-bordered">
-        <thead>
+      <div>
+        <table className="table table-bordered">
+          <thead>
           <ArticleHead />
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           { store.articles.map(
             (article, idx) => <ArticleRow store={ store } article={ article } key={ idx } />
           )}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+        <button onClick={ this.onNewArticle }>New Article</button>
+      </div>
     );
-  }
+  };
 
-  onNewTodo = () => {
-    this.props.store.addTodo(prompt('Enter a new todo:','coffee plz'));
-  }
+  onNewArticle = () => {
+    this.props.store.newArticle();
+  };
 }
 
-export default ArticleTable
+export default ArticleTable;

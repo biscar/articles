@@ -6,7 +6,8 @@ class ObservableArticlesStore {
   @observable articles = [];
 
   constructor() {
-    this.article_types = [];
+    this.article_types = {};
+    this.stories = {};
 
     autorun(() => {
       this.loadArticles();
@@ -19,6 +20,8 @@ class ObservableArticlesStore {
       type: 'GET',
       success: (data) => {
         this.article_types = data.data.article_types;
+        this.stories = data.data.stories;
+
         this.articles = data.data.articles;
       }
     });
@@ -28,21 +31,30 @@ class ObservableArticlesStore {
     return this.article_types;
   }
 
+  getStories() {
+    return this.stories;
+  }
+
   addArticle(article) {
     this.articles.push(article);
+  }
+
+  newArticle() {
+    this.articles.push({editing: true, story_id: this.defaultStory(),
+      type_code: this.defaultArticleType()});
+  }
+
+  defaultArticleType() {
+    return Object.keys(this.article_types)[0];
+  }
+
+  defaultStory() {
+    return Object.keys(this.stories)[0];
   }
 
   editArticle(article) {
     article.editing = true;
   }
-
-  findValueByKey = (key, items) => {
-    const new_key = Object.keys(items).find(function(element) {
-        return element === key;
-    });
-
-    return items[new_key];
-  };
 
   updateArticle(article, params) {
     $.ajax({
@@ -52,12 +64,27 @@ class ObservableArticlesStore {
       success: () =>  {
         article.name = params.name;
         article.text = params.text;
-        article.type = this.findValueByKey(params.type, this.article_types);
+        article.type_code = params.type_code;
+        article.story_id = params.story_id;
         article.editing = false;
       }
     });
+  };
 
-  }
+  createArticle(article, params) {
+    $.ajax({
+      url: `/api/v1/article`,
+      type: 'POST',
+      data: params,
+      success: () =>  {
+        article.name = params.name;
+        article.text = params.text;
+        article.type_code = params.type_code;
+        article.story_id = params.story_id;
+        article.editing = false;
+      }
+    });
+  };
 
   removeArticle(article) {
     $.ajax({

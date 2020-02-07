@@ -12,6 +12,14 @@ class ArticleSelectColumn extends React.Component {
     this.setState({value: e.target.value});
   };
 
+  findValueByKey = (key, items) => {
+    const new_key = Object.keys(items).find(function(element) {
+      return element == key;
+    });
+
+    return items[new_key];
+  };
+
   findKeyByValue = (value, items) => {
     return Object.keys(items).find(function(element) {
       return items[element] === value;
@@ -21,16 +29,16 @@ class ArticleSelectColumn extends React.Component {
   render () {
     const items = this.props.items;
     const editing = this.props.editing;
-    const value = this.props.value;
+    const key = this.props.value;
 
     return (
       <td>
         { editing
-          ?  <select onChange={this.handleChangeValue} defaultValue={this.findKeyByValue(value, items)}
+          ?  <select onChange={this.handleChangeValue} defaultValue={key}
                      className="form-control">
                { Object.keys(items).map((e, key) => <option key={key} value={e}>{items[e]}</option>) }
              </select>
-          : value
+          : this.findValueByKey(key, items)
         }
       </td>
     );

@@ -20,10 +20,16 @@ module Api
         render json: { status: 200 }
       end
 
+      def create
+        Articles::Creator.new(permitted_update_params(params)).create
+
+        render json: { status: 200 }
+      end
+
       private
 
       def permitted_update_params(params)
-        params.permit(:name, :text, :type).to_h.with_indifferent_access
+        params.permit(:name, :text, :type_code, :story_id).to_h.with_indifferent_access
       end
 
     end

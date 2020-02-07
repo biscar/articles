@@ -6,20 +6,19 @@ module Articles
       @id = id
       @name = params[:name]
       @text = params[:text]
-      @type = params[:type]
+      @type_code = params[:type_code]
+      @story_id = params[:story_id]
     end
 
     def update
       article = article_class.find_by(id: id)
+      article.story_id = story_id
       article.name = name
       article.text = text
-      article.article_type = article_type_class.find_by(lookup_code: type)
+      article.article_type = article_type_class.find_by(lookup_code: type_code)
       article.save!
     end
 
-    attr_reader :id, :name, :text, :type, :article_type_class, :article_class
-
-
+    attr_reader :id, :name, :text, :type_code, :story_id, :article_type_class, :article_class
   end
-
 end
