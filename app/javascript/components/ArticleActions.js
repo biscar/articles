@@ -1,21 +1,6 @@
 import React from "react";
-import { observable, action, computed } from "mobx";
-import { observer } from "mobx-react";
 
-@observer
 class ArticleActions extends React.Component {
-  render() {
-    const editing = this.props.article.editing;
-
-    return (
-      <td>
-        <button onClick={ this.onRemove }>remove</button>
-        { editing ?  <button onClick={ this.props.onUpdate }>save</button> :
-          <button onClick={ this.onEdit }>edit</button> }
-      </td>
-    );
-  }
-
   onRemove = () => {
     this.props.store.removeArticle(this.props.article);
   };
@@ -23,6 +8,18 @@ class ArticleActions extends React.Component {
   onEdit = () => {
     this.props.store.editArticle(this.props.article);
   };
+
+  render() {
+    const editing = this.props.article.editing;
+
+    return (
+      <td>
+        <button onClick={this.onRemove} type="button" className="btn btn-danger">remove</button>
+        { editing ? <button onClick={this.props.onUpdate} type="button" className="btn btn-success">save</button> :
+          <button onClick={this.onEdit} type="button" className="btn btn-primary">edit</button> }
+      </td>
+    );
+  }
 }
 
 export default ArticleActions;

@@ -1,8 +1,5 @@
 import React from "react";
-import { observable, action, computed } from "mobx";
-import { observer } from "mobx-react";
 
-@observer
 class TextControl extends React.Component {
 
   constructor(props) {
@@ -11,7 +8,7 @@ class TextControl extends React.Component {
     this.state = { value: props.value };
   }
 
-  handleChangeValue = (e) => {
+  onChangeValue = (e) => {
     this.setState({value: e.target.value});
   };
 
@@ -20,7 +17,7 @@ class TextControl extends React.Component {
     const editing = this.props.editing;
 
     return (
-      editing ? <textarea onChange={this.handleChangeValue} defaultValue={value}></textarea> : value
+      editing ? <textarea onChange={this.onChangeValue} defaultValue={value}></textarea> : value
     );
   }
 }

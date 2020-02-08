@@ -1,12 +1,16 @@
 import React from "react";
-import { observable, action, computed } from "mobx";
-import { observer } from "mobx-react";
 
-@observer
 class ArticleHeadColumn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  onChange = () => {
+    const order = this.state.value === 'asc' ? 'desc' : 'asc';
+    this.setState({ value: order});
+
+    this.props.store.sortTable(this.props.column, order);
   }
 
   render() {
@@ -16,13 +20,6 @@ class ArticleHeadColumn extends React.Component {
         <a onClick={this.onChange} href="#" >{label}</a>
       </th>
     );
-  }
-
-  onChange = () => {
-    const order = this.state.value === 'asc' ? 'desc' : 'asc';
-    this.setState({ value: order});
-
-    this.props.store.sortTable(this.props.column, order);
   }
 }
 

@@ -1,6 +1,5 @@
 import React from "react";
 import SelectControl from "./SelectControl";
-import { observer } from "mobx-react";
 
 const items = {
   '': 'Select field by group',
@@ -11,16 +10,15 @@ const items = {
   total_story: 'Story with totals'
 };
 
-@observer
 class ArticleFinder extends React.Component {
-  render() {
-    return (
-      <SelectControl  onChange={this.onChange} editing items={items} />
-    );
-  }
-
   onChange = (e) => {
     this.props.store.groupTable(e.target.value);
+  }
+
+  render() {
+    return (
+      <SelectControl onChange={this.onChange} editing items={items} />
+    );
   }
 }
 

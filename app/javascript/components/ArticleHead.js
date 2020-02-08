@@ -1,9 +1,6 @@
 import React from "react";
-import { observable, action, computed } from "mobx";
-import { observer } from "mobx-react";
 import ArticleHeadColumn from "./ArticleHeadColumn";
 
-@observer
 class ArticleHead extends React.Component {
 
   render() {

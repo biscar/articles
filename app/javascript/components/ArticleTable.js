@@ -12,22 +12,21 @@ class ArticleTable extends React.Component {
 
     if (Array.isArray(store.articles)) {
       rows = store.articles.map(
-        (article, idx) => {
+        (article) => {
           index = index + 1;
-          return  <ArticleRow store={ store } article={ article } key={ index } />
+          return <ArticleRow store={store} article={article} key={index} />;
         }
       )
-
     }
     else {
       for (var group in store.articles){
         index = index + 1;
-        rows.push(<GroupRow store={store} label={group} key={ index }/>);
+        rows.push(<GroupRow store={store} label={group} key={index}/>);
 
         rows = rows.concat(store.articles[group].map((article) =>
           {
             index = index + 1;
-            return <ArticleRow store={ store } article={article} key={index} />
+            return <ArticleRow store={store} article={article} key={index} />;
           }
         ))
       }
@@ -36,6 +35,10 @@ class ArticleTable extends React.Component {
     return rows;
   }
 
+  onNewArticle = () => {
+    this.props.store.newArticle();
+  };
+
   render() {
     const store = this.props.store;
 
@@ -43,19 +46,15 @@ class ArticleTable extends React.Component {
       <div>
         <table className="table table-bordered">
           <thead>
-            <ArticleHead store={ store }/>
+            <ArticleHead store={store}/>
           </thead>
           <tbody>
-          { this.getRows(store) }
+            {this.getRows(store)}
           </tbody>
         </table>
-        <button onClick={ this.onNewArticle }>New Article</button>
+        <button onClick={this.onNewArticle} type="button" className="btn btn-primary">New Article</button>
       </div>
     );
-  };
-
-  onNewArticle = () => {
-    this.props.store.newArticle();
   };
 }
 
