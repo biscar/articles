@@ -96,10 +96,15 @@ class ObservableArticlesStore {
     });
   }
 
-  sortTable(field, sort){
+  sortTable(field, sort) {
     this.tableStore.sort_field = field;
-    this.tableStore.sort_value = sort;
+    this.tableStore.sort_direction = sort;
 
+    this.searchArticles();
+  }
+
+  groupTable(field) {
+    this.tableStore.group_field = field;
     this.searchArticles();
   }
 
@@ -110,7 +115,8 @@ class ObservableArticlesStore {
         "search_field": this.tableStore.search_field,
         "search": this.tableStore.search_value,
         "sort_field": this.tableStore.sort_field,
-        "sort_value": this.tableStore.sort_value
+        "sort_direction": this.tableStore.sort_direction,
+        "group_field": this.tableStore.group_field
       },
       type: 'GET',
       success: (data) => {

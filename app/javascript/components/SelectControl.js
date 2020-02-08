@@ -1,6 +1,6 @@
 import React from "react";
 
-class SelectContol extends React.Component {
+class SelectControl extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,7 +32,7 @@ class SelectContol extends React.Component {
 
     return (
       editing
-        ? <select onChange={this.handleChangeValue} defaultValue={key}
+        ? <select onChange={this.props.onChange || this.handleChangeValue} defaultValue={key}
                   className="form-control">
            { Object.keys(items).map((e, key) => <option key={key} value={e}>{items[e]}</option>) }
           </select>
@@ -41,4 +41,4 @@ class SelectContol extends React.Component {
   }
 }
 
-export default SelectContol;
+export default SelectControl;

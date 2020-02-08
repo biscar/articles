@@ -4,29 +4,31 @@ module Articles
       @articles = articles
     end
 
-    def add_sort_conditions(sort_field, sort_value)
-      return articles if sort_field.blank? || sort_value.blank?
+    def add_sort_conditions(sort_field, direction)
+      return articles if sort_field.blank? || direction.blank?
 
-      if sort_field && sort_value
-        articles.order("#{table_field(sort_field)} #{sort_value}")
-      else
-        articles
+      case articles.class.name
+      when 'Hash'
+        sort_hash!(sort_field, direction)
+      when 'Array'
+        sort_array!(articles, sort_field, direction)
       end
+
+      articles
     end
 
     private
 
     attr_reader :articles
+    DESC = 'desc'.freeze
 
-    def table_field(sort_field)
-      case sort_field
-      when 'story' then 'stories.name'
-      when 'name' then 'articles.name'
-      when 'text' then 'articles.text'
-      when 'type' then 'article_types.name'
-      end
+    def sort_array!(articles, field, direction)
+      articles.sort_by! { |article| article[field] }
+      articles.reverse! if direction == DESC
     end
 
+    def sort_hash!(field, direction)
+      articles.each { |_, values| sort_array!(values, field, direction) }
+    end
   end
 end
-
