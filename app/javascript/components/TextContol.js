@@ -3,7 +3,7 @@ import { observable, action, computed } from "mobx";
 import { observer } from "mobx-react";
 
 @observer
-class ArticleTextColumn extends React.Component {
+class TextControl extends React.Component {
 
   constructor(props) {
     super(props);
@@ -20,14 +20,9 @@ class ArticleTextColumn extends React.Component {
     const editing = this.props.editing;
 
     return (
-        <td>
-          { editing
-            ? <textarea onChange={this.handleChangeValue} defaultValue={value}></textarea>
-            : value
-          }
-        </td>
+      editing ? <textarea onChange={this.handleChangeValue} defaultValue={value}></textarea> : value
     );
   }
 }
 
-export default ArticleTextColumn;
+export default TextControl;

@@ -1,7 +1,6 @@
 import React from "react";
-//import {Utils} from "Utils";
 
-class ArticleSelectColumn extends React.Component {
+class SelectContol extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,17 +31,14 @@ class ArticleSelectColumn extends React.Component {
     const key = this.props.value;
 
     return (
-      <td>
-        { editing
-          ?  <select onChange={this.handleChangeValue} defaultValue={key}
-                     className="form-control">
-               { Object.keys(items).map((e, key) => <option key={key} value={e}>{items[e]}</option>) }
-             </select>
-          : this.findValueByKey(key, items)
-        }
-      </td>
+      editing
+        ? <select onChange={this.handleChangeValue} defaultValue={key}
+                  className="form-control">
+           { Object.keys(items).map((e, key) => <option key={key} value={e}>{items[e]}</option>) }
+          </select>
+        : this.findValueByKey(key, items)
     );
   }
 }
 
-export default ArticleSelectColumn;
+export default SelectContol;
