@@ -16,16 +16,17 @@ class ObservableArticlesStore {
   }
 
   loadArticles() {
-    $.ajax({
-      url: `/api/v1/article`,
-      type: 'GET',
-      success: (data) => {
-        this.article_types = data.data.article_types;
-        this.stories = data.data.stories;
-
-        this.articles = data.data.articles;
-      }
-    });
+    this.articleApi.index({
+      'search_field': this.tableStore.search_field,
+      'search': this.tableStore.search_value,
+      'sort_field': this.tableStore.sort_field,
+      'sort_direction': this.tableStore.sort_direction,
+      'group_field': this.tableStore.group_field})
+      .then(response => {
+        this.article_types = response.data.article_types;
+        this.stories = response.data.stories;
+        this.articles = response.data.articles;
+      });
   }
 
   articleTypes() {
@@ -104,29 +105,12 @@ class ObservableArticlesStore {
     this.tableStore.sort_field = field;
     this.tableStore.sort_direction = sort;
 
-    this.searchArticles();
+    this.loadArticles();
   }
 
   groupTable(field) {
     this.tableStore.group_field = field;
-    this.searchArticles();
-  }
-
-  searchArticles() {
-    $.ajax({
-      url: `/api/v1/article`,
-      data: {
-        "search_field": this.tableStore.search_field,
-        "search": this.tableStore.search_value,
-        "sort_field": this.tableStore.sort_field,
-        "sort_direction": this.tableStore.sort_direction,
-        "group_field": this.tableStore.group_field
-      },
-      type: 'GET',
-      success: (data) => {
-        this.articles = data.data.articles;
-      }
-    });
+    this.loadArticles();
   }
 }
 

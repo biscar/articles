@@ -17,7 +17,7 @@ class ArticleFinder extends React.Component {
   }
 
   onSearch = () => {
-    this.props.store.searchArticles();
+    this.props.store.loadArticles();
   };
 
   render() {

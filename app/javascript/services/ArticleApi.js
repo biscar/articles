@@ -8,6 +8,12 @@ class ArticleApi {
     axios.defaults.headers.common['X-CSRF-Token'] = csrfToken;
   }
 
+  index(params) {
+    return axios.get(this.url, {params: params})
+      .then(response => response.data)
+      .catch(this.errorHandler);
+  }
+
   destroy(articleId) {
     return axios.delete(`${this.url}/${articleId}`)
       .then(response => response.data)
