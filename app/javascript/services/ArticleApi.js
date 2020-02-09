@@ -1,5 +1,4 @@
 import axios from 'axios';
-import RemoveArticleChannel from "../channels/RemoveArticleChannel";
 
 class ArticleApi {
   url = '/api/v1/article';
@@ -11,6 +10,12 @@ class ArticleApi {
 
   destroy(articleId) {
     return axios.delete(`${this.url}/${articleId}`)
+      .then(response => response.data)
+      .catch(this.errorHandler);
+  }
+
+  update(articleId, params) {
+    return axios.put(`${this.url}/${articleId}`, params)
       .then(response => response.data)
       .catch(this.errorHandler);
   }

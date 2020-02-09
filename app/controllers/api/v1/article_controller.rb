@@ -15,7 +15,7 @@ module Api
       end
 
       def update
-        Articles::Updater.new(params[:id], permitted_update_params(params)).update
+        Articles::Updater.new(permitted_update_params(params)).update
 
         render json: { status: 200 }
       end
@@ -29,7 +29,7 @@ module Api
       private
 
       def permitted_update_params(params)
-        params.permit(:name, :text, :type_code, :story_id).to_h.with_indifferent_access
+        params.permit(:id, :name, :text, :type_code, :story_id).to_h.with_indifferent_access
       end
 
       def permitted_index_params(params)

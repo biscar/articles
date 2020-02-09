@@ -60,21 +60,6 @@ class ObservableArticlesStore {
     article.editing = true;
   }
 
-  updateArticle(article, params) {
-    $.ajax({
-      url: `/api/v1/article/${article.id}`,
-      type: 'PUT',
-      data: params,
-      success: () =>  {
-        article.name = params.name;
-        article.text = params.text;
-        article.type_code = params.type_code;
-        article.story_id = params.story_id;
-        article.editing = false;
-      }
-    });
-  };
-
   createArticle(article, params) {
     $.ajax({
       url: `/api/v1/article`,
@@ -90,9 +75,25 @@ class ObservableArticlesStore {
     this.articleApi.destroy(article.id);
   }
 
+  updateArticle(articleId, params) {
+    this.articleApi.update(articleId, params);
+  };
+
   removeArticleFromStore(article_id){
     const article = this.findArticleById(article_id);
     this.articles.remove(article);
+  }
+
+  updateArticleInStore(updated_article) {
+    const article = this.findArticleById(updated_article['id']);
+
+    article['name'] = updated_article['name'];
+    article['story'] = updated_article['story'];
+    article['story_id'] = updated_article['story_id'];
+    article['text'] = updated_article['text'];
+    article['type'] = updated_article['type'];
+    article['type_code'] = updated_article['type_code'];
+    article['editing'] = false;
   }
 
   findArticleById = (id) => {

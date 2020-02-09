@@ -7,10 +7,12 @@ import ObservableTableStore from "../components/ObservableTableStore"
 import ArticleFinder from "../components/ArticleFinder";
 import ArticleGrouper from "../components/ArticleGrouper";
 import RemoveArticleChannel from "../channels/RemoveArticleChannel";
+import UpdateArticleChannel from "../channels/UpdateArticleChannel";
 
 const tableStore = new ObservableTableStore();
 const store = new ObservableArticlesStore(tableStore);
 new RemoveArticleChannel(store);
+new UpdateArticleChannel(store);
 
 ReactDOM.render(
   <ArticleFinder store={store} tableStore={tableStore}/>,

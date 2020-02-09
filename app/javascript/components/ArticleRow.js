@@ -16,7 +16,7 @@ class ArticleRow extends React.Component {
   }
 
   onUpdate = () => {
-    this.props.store.updateArticle(this.props.article, this.getRowValues());
+    this.props.store.updateArticle(this.props.article.id, this.getRowValues());
   }
 
   onCreate = () => {
