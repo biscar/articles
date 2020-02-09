@@ -9,25 +9,23 @@ class ArticleApi {
   }
 
   index(params) {
-    return axios.get(this.url, {params: params})
-      .then(response => response.data)
-      .catch(this.errorHandler);
+    return this.handleRequest(axios.get(this.url, {params: params}));
   }
 
   destroy(articleId) {
-    return axios.delete(`${this.url}/${articleId}`)
-      .then(response => response.data)
-      .catch(this.errorHandler);
+    return this.handleRequest(axios.delete(`${this.url}/${articleId}`));
   }
 
   update(articleId, params) {
-    return axios.put(`${this.url}/${articleId}`, params)
-      .then(response => response.data)
-      .catch(this.errorHandler);
+    return this.handleRequest(axios.put(`${this.url}/${articleId}`, params));
   }
 
   create(params) {
-    return axios.post(this.url, params)
+    return this.handleRequest(axios.post(this.url, params));
+  }
+
+  handleRequest(request) {
+    return request
       .then(response => response.data)
       .catch(this.errorHandler);
   }
