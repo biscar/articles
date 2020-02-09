@@ -9,19 +9,25 @@ module Api
       end
 
       def destroy
-        Articles::Destroyer.new(permitted_destroy_params(params)).destroy
+        destroyer = Articles::Destroyer.new(permitted_destroy_params(params))
+        destroyer.destroy
+        destroyer.notify_channel
 
         render json: { status: 200 }
       end
 
       def update
-        Articles::Updater.new(permitted_update_params(params)).update
+        updater = Articles::Updater.new(permitted_update_params(params))
+        updater.update
+        updater.notify_channel
 
         render json: { status: 200 }
       end
 
       def create
-        Articles::Creator.new(permitted_update_params(params)).create
+        creator = Articles::Creator.new(permitted_update_params(params))
+        creator.create
+        creator.notify_channel
 
         render json: { status: 200 }
       end
@@ -39,7 +45,6 @@ module Api
       def permitted_destroy_params(params)
         params.permit(:id).to_h.with_indifferent_access
       end
-
     end
   end
 end

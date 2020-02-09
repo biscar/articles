@@ -7,13 +7,15 @@ module Articles
 
     def destroy
       article_class.find_by(id: id)&.destroy!
-
-      channel_job.perform_later(id)
     end
 
     private
 
     attr_reader :id
+
+    def job_params
+      id
+    end
   end
 end
 

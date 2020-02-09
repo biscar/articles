@@ -18,9 +18,13 @@ module Articles
       article.article_type = article_type_class.find_by(lookup_code: type_code)
       article.save!
 
-      channel_job.perform_later(article_json(article))
+      @article = article
     end
 
-    attr_reader :name, :text, :type_code, :story_id, :article_type_class
+    attr_reader :article, :name, :text, :type_code, :story_id, :article_type_class
+
+    def job_params
+      article_json(article)
+    end
   end
 end

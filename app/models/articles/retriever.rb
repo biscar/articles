@@ -1,11 +1,7 @@
 module Articles
-  class Retriever
-    def initialize(params = {}, article_class: Ar::Article, article_type_class: Ar::ArticleType,
-                   story_class: Ar::Story, finder_class: Articles::Finder, sorter_class: Articles::Sorter,
-                   grouper_class: Articles::Grouper)
-      @article_class = article_class
-      @article_type_class = article_type_class
-      @story_class = story_class
+  class Retriever < Base
+    def post_initialize(params, channel_job: CreateArticleJob, finder_class: Articles::Finder,
+                        sorter_class: Articles::Sorter, grouper_class: Articles::Grouper)
       @finder_class = finder_class
       @sorter_class = sorter_class
       @grouper_class = grouper_class
@@ -29,29 +25,18 @@ module Articles
 
     private
 
-    attr_reader :article_class, :article_type_class, :story_class, :search_text,
-                :search_field, :finder_class, :sort_field, :sort_direction, :sorter_class, :grouper_class, :group_field
+    attr_reader :search_text, :search_field, :finder_class, :sort_field, :sort_direction, :sorter_class,
+                :grouper_class, :group_field
 
     def articles_relation
       article_class
-        .joins(:story)
-        .joins(:article_type)
+        .includes(:story)
+        .includes(:article_type)
         .order(:id)
     end
 
     def articles_data(articles)
-      articles.map do |article|
-        {
-          id: article.id,
-          story_id: article.story_id,
-          story: article.story&.name,
-          name: article.name,
-          text: article.text,
-          type_code: article.article_type&.lookup_code,
-          type: article.article_type&.name,
-          created_at: article.created_at
-        }.with_indifferent_access
-      end
+      articles.map { |article| article_json(article).merge(created_at: article.created_at) }
     end
 
     def article_types_data
