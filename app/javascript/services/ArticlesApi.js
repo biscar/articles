@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-class ArticleApi {
-  url = '/api/v1/article';
+class ArticlesApi {
+  url = '/api/v1/articles';
 
   constructor() {
     const csrfToken = document.querySelector("meta[name=csrf-token]").content;
@@ -35,4 +35,4 @@ class ArticleApi {
   }
 }
 
-export default ArticleApi;
+export default ArticlesApi;

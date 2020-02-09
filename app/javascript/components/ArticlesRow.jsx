@@ -1,11 +1,11 @@
 import React from "react";
 import { observer } from "mobx-react";
-import ArticleActions from "./ArticleActions";
+import ArticlesActions from "./ArticlesActions";
 import TextControl from "./TextContol";
 import SelectControl from "./SelectControl";
 
 @observer
-class ArticleRow extends React.Component {
+class ArticlesRow extends React.Component {
   constructor(props) {
     super(props);
 
@@ -51,10 +51,10 @@ class ArticleRow extends React.Component {
           <SelectControl ref={this.type} value={article.type_code} editing={article.editing}
                          items={this.props.store.articleTypes()} />
         </td>
-        <ArticleActions onUpdate={article.id ? this.onUpdate : this.onCreate} store={store} article={article} />
+        <ArticlesActions onUpdate={article.id ? this.onUpdate : this.onCreate} store={store} article={article} />
       </tr>
     );
   }
 }
 
-export default ArticleRow;
+export default ArticlesRow;

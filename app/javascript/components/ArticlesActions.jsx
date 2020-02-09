@@ -1,6 +1,6 @@
 import React from "react";
 
-class ArticleActions extends React.Component {
+class ArticlesActions extends React.Component {
   onRemove = () => {
     this.props.store.removeArticle(this.props.article);
   };
@@ -22,4 +22,4 @@ class ArticleActions extends React.Component {
   }
 }
 
-export default ArticleActions;
+export default ArticlesActions;

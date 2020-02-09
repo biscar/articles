@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import ArticleTable from "../components/ArticleTable"
+import ArticlesTable from "../components/ArticlesTable"
 import ObservableArticlesStore from "../components/ObservableArticlesStore"
 import ObservableTableStore from "../components/ObservableTableStore"
-import ArticleFinder from "../components/ArticleFinder";
-import ArticleGrouper from "../components/ArticleGrouper";
+import ArticlesFinder from "../components/ArticlesFinder";
+import ArticlesGrouper from "../components/ArticlesGrouper";
 import RemoveArticleChannel from "../channels/RemoveArticleChannel";
 import UpdateArticleChannel from "../channels/UpdateArticleChannel";
 import CreateArticleChannel from "../channels/CreateArticleChannel";
@@ -17,16 +17,16 @@ new UpdateArticleChannel(store);
 new CreateArticleChannel(store);
 
 ReactDOM.render(
-  <ArticleFinder store={store} tableStore={tableStore}/>,
+  <ArticlesFinder store={store} tableStore={tableStore}/>,
   document.getElementById('article_finder')
 );
 
 ReactDOM.render(
-  <ArticleGrouper store={store} tableStore={tableStore}/>,
+  <ArticlesGrouper store={store} tableStore={tableStore}/>,
   document.getElementById('article_grouper')
 );
 
 ReactDOM.render(
-  <ArticleTable store={ store }/>,
+  <ArticlesTable store={ store }/>,
   document.getElementById('articles')
 );

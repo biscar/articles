@@ -1,6 +1,6 @@
 import React from "react";
 
-class ArticleHeadColumn extends React.Component {
+class ArticlesSortHeadColumn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -23,4 +23,4 @@ class ArticleHeadColumn extends React.Component {
   }
 }
 
-export default ArticleHeadColumn;
+export default ArticlesSortHeadColumn;

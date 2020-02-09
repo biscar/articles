@@ -1,5 +1,5 @@
 import { observable, autorun } from "mobx";
-import ArticleApi from "../services/ArticleApi";
+import ArticlesApi from "../services/ArticlesApi";
 
 class ObservableArticlesStore {
   @observable articles = [];
@@ -8,7 +8,7 @@ class ObservableArticlesStore {
     this.article_types = {};
     this.stories = {};
     this.tableStore = tableStore;
-    this.articleApi = new ArticleApi();
+    this.articlesApi = new ArticlesApi();
 
     autorun(() => {
       this.loadArticles();
@@ -16,7 +16,7 @@ class ObservableArticlesStore {
   }
 
   loadArticles() {
-    this.articleApi.index({
+    this.articlesApi.index({
       'search_field': this.tableStore.search_field,
       'search': this.tableStore.search_value,
       'sort_field': this.tableStore.sort_field,
@@ -70,15 +70,15 @@ class ObservableArticlesStore {
   }
 
   createArticle(article, params) {
-    this.articleApi.create(params);
+    this.articlesApi.create(params);
   };
 
   removeArticle(article) {
-    this.articleApi.destroy(article.id);
+    this.articlesApi.destroy(article.id);
   }
 
   updateArticle(articleId, params) {
-    this.articleApi.update(articleId, params);
+    this.articlesApi.update(articleId, params);
   };
 
   removeArticleFromStore(article_id){
@@ -95,14 +95,7 @@ class ObservableArticlesStore {
 
   updateArticleInStore(updated_article) {
     const article = this.findArticleById(updated_article['id']);
-
-    article['name'] = updated_article['name'];
-    article['story'] = updated_article['story'];
-    article['story_id'] = updated_article['story_id'];
-    article['text'] = updated_article['text'];
-    article['type'] = updated_article['type'];
-    article['type_code'] = updated_article['type_code'];
-    article['editing'] = false;
+    Object.assign(article, updated_article, {editing: false})
   }
 
   addArticleToStore(article) {
@@ -120,7 +113,6 @@ class ObservableArticlesStore {
       for (var articles of Object.values(this.articles)) {
         const article = this.findArticleByIdInArray(articles, id);
         if (article) return article;
-
       }
     }
   };

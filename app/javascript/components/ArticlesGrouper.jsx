@@ -10,7 +10,7 @@ const items = {
   total_story: 'Story with totals'
 };
 
-class ArticleFinder extends React.Component {
+class ArticlesFinder extends React.Component {
   onChange = (e) => {
     this.props.store.groupTable(e.target.value);
   }
@@ -22,4 +22,4 @@ class ArticleFinder extends React.Component {
   }
 }
 
-export default ArticleFinder;
+export default ArticlesFinder;

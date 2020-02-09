@@ -1,9 +1,8 @@
 import React from "react";
-import { observable, action, computed } from "mobx";
 import { observer } from "mobx-react";
 
 @observer
-class ArticleFinder extends React.Component {
+class ArticlesFinder extends React.Component {
   onChangeSearchValue = (e) => {
     this.props.tableStore.search_value = e.target.value;
   };
@@ -48,4 +47,4 @@ class ArticleFinder extends React.Component {
   }
 }
 
-export default ArticleFinder;
+export default ArticlesFinder;

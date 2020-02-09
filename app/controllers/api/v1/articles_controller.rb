@@ -1,7 +1,6 @@
 module Api
   module V1
-    class ArticleController < ApplicationController
-
+    class ArticlesController < ApplicationController
       def index
         json = Articles::Retriever.new(permitted_index_params(params)).retrieve_json
 

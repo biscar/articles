@@ -1,11 +1,11 @@
 import React from "react";
 import { observer } from "mobx-react";
-import ArticleRow from "./ArticleRow";
-import ArticleHead from "./ArticleHead";
+import ArticlesRow from "./ArticlesRow";
+import ArticlesHead from "./ArticlesHead";
 import GroupRow from "./GroupRow";
 
 @observer
-class ArticleTable extends React.Component {
+class ArticlesTable extends React.Component {
   getRows = (store) => {
     let rows = [];
     let index = 0;
@@ -14,7 +14,7 @@ class ArticleTable extends React.Component {
       rows = store.articles.map(
         (article) => {
           index = index + 1;
-          return <ArticleRow store={store} article={article} key={index} />;
+          return <ArticlesRow store={store} article={article} key={index} />;
         }
       )
     }
@@ -26,7 +26,7 @@ class ArticleTable extends React.Component {
         rows = rows.concat(store.articles[group].map((article) =>
           {
             index = index + 1;
-            return <ArticleRow store={store} article={article} key={index} />;
+            return <ArticlesRow store={store} article={article} key={index} />;
           }
         ))
       }
@@ -46,7 +46,7 @@ class ArticleTable extends React.Component {
       <div>
         <table className="table table-bordered">
           <thead>
-            <ArticleHead store={store}/>
+            <ArticlesHead store={store}/>
           </thead>
           <tbody>
             {this.getRows(store)}
@@ -58,4 +58,4 @@ class ArticleTable extends React.Component {
   };
 }
 
-export default ArticleTable;
+export default ArticlesTable;
