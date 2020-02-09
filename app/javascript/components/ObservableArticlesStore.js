@@ -86,7 +86,7 @@ class ObservableArticlesStore {
       const article = this.findArticleById(article_id);
       this.articles.remove(article);
     } else {
-      for (var articles of Object.values(this.articles)) {
+      for (const articles of Object.values(this.articles)) {
         const article = this.findArticleByIdInArray(articles, article_id);
         if (article) articles.remove(article);
       }
@@ -117,10 +117,8 @@ class ObservableArticlesStore {
     }
   };
 
-  findArticleByIdInArray(articles, id){
-    return articles.find(function(article) {
-      return article['id'] == id;
-    });
+  findArticleByIdInArray(articles, id) {
+    return articles.find(article => article['id'] == id);
   }
 
   sortTable(field, sort) {

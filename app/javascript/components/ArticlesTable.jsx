@@ -44,7 +44,7 @@ class ArticlesTable extends React.Component {
 
     return (
       <div>
-        <table className="table table-bordered">
+        <table className="table table-bordered table-striped">
           <thead>
             <ArticlesHead store={store}/>
           </thead>

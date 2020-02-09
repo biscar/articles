@@ -2,7 +2,7 @@ import React from "react";
 import SelectControl from "./SelectControl";
 
 const items = {
-  '': 'Select field by group',
+  '': 'Please select',
   story: 'Story',
   name: 'Name',
   text: 'Text',
