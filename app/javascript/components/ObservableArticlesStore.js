@@ -61,14 +61,8 @@ class ObservableArticlesStore {
   }
 
   createArticle(article, params) {
-    $.ajax({
-      url: `/api/v1/article`,
-      type: 'POST',
-      data: params,
-      success: () =>  {
-        this.loadArticles();
-      }
-    });
+    this.articles.remove(article);
+    this.articleApi.create(params);
   };
 
   removeArticle(article) {
@@ -94,6 +88,10 @@ class ObservableArticlesStore {
     article['type'] = updated_article['type'];
     article['type_code'] = updated_article['type_code'];
     article['editing'] = false;
+  }
+
+  addArticleToStore(article) {
+    this.articles.push(article);
   }
 
   findArticleById = (id) => {

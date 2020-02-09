@@ -20,6 +20,12 @@ class ArticleApi {
       .catch(this.errorHandler);
   }
 
+  create(params) {
+    return axios.post(this.url, params)
+      .then(response => response.data)
+      .catch(this.errorHandler);
+  }
+
   errorHandler(error) {
     alert(error.response);
   }

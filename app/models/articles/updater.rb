@@ -12,6 +12,8 @@ module Articles
 
     def update
       article = article_class.find_by(id: id)
+      return unless article
+
       article.story_id = story_id
       article.name = name
       article.text = text

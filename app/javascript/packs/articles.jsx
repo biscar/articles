@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import ReactDOM, { render } from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 
 import ArticleTable from "../components/ArticleTable"
 import ObservableArticlesStore from "../components/ObservableArticlesStore"
@@ -8,11 +8,13 @@ import ArticleFinder from "../components/ArticleFinder";
 import ArticleGrouper from "../components/ArticleGrouper";
 import RemoveArticleChannel from "../channels/RemoveArticleChannel";
 import UpdateArticleChannel from "../channels/UpdateArticleChannel";
+import CreateArticleChannel from "../channels/CreateArticleChannel";
 
 const tableStore = new ObservableTableStore();
 const store = new ObservableArticlesStore(tableStore);
 new RemoveArticleChannel(store);
 new UpdateArticleChannel(store);
+new CreateArticleChannel(store);
 
 ReactDOM.render(
   <ArticleFinder store={store} tableStore={tableStore}/>,
