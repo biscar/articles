@@ -42,11 +42,19 @@ class ObservableArticlesStore {
   }
 
   newArticle() {
-    this.articles.push({
+    var newArticle = {
       editing: true,
       story_id: this.defaultStory(),
       type_code: this.defaultArticleType()
-    });
+    };
+
+    if (Array.isArray(this.articles)) {
+      this.articles.push(newArticle);
+    } {
+      const groups = Object.keys(this.articles);
+      const lastGroup = this.articles[groups[groups.length - 1]];
+      lastGroup.push(newArticle);
+    }
   }
 
   defaultArticleType() {
@@ -62,7 +70,6 @@ class ObservableArticlesStore {
   }
 
   createArticle(article, params) {
-    this.articles.remove(article);
     this.articleApi.create(params);
   };
 
@@ -75,8 +82,15 @@ class ObservableArticlesStore {
   };
 
   removeArticleFromStore(article_id){
-    const article = this.findArticleById(article_id);
-    this.articles.remove(article);
+    if (Array.isArray(this.articles)) {
+      const article = this.findArticleById(article_id);
+      this.articles.remove(article);
+    } else {
+      for (var articles of Object.values(this.articles)) {
+        const article = this.findArticleByIdInArray(articles, article_id);
+        if (article) articles.remove(article);
+      }
+    }
   }
 
   updateArticleInStore(updated_article) {
@@ -92,14 +106,30 @@ class ObservableArticlesStore {
   }
 
   addArticleToStore(article) {
-    this.articles.push(article);
+    if (Array.isArray(this.articles)) {
+      this.articles.push(article);
+    } {
+      this.loadArticles();
+    }
   }
 
   findArticleById = (id) => {
-    return this.articles.find(function(article) {
+    if (Array.isArray(this.articles)) {
+      return this.findArticleByIdInArray(this.articles, id);
+    } else {
+      for (var articles of Object.values(this.articles)) {
+        const article = this.findArticleByIdInArray(articles, id);
+        if (article) return article;
+
+      }
+    }
+  };
+
+  findArticleByIdInArray(articles, id){
+    return articles.find(function(article) {
       return article['id'] == id;
     });
-  };
+  }
 
   sortTable(field, sort) {
     this.tableStore.sort_field = field;

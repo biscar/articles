@@ -19,7 +19,7 @@ class ArticleTable extends React.Component {
       )
     }
     else {
-      for (var group in store.articles){
+      for (var group in store.articles) {
         index = index + 1;
         rows.push(<GroupRow store={store} label={group} key={index}/>);
 
