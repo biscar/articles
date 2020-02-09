@@ -9,19 +9,23 @@ class ArticlesApi {
   }
 
   index(params) {
-    return this.handleRequest(axios.get(this.url, {params: params}));
+    const request = axios.get(this.url, {params: params});
+    return this.handleRequest(request);
   }
 
   destroy(articleId) {
-    return this.handleRequest(axios.delete(`${this.url}/${articleId}`));
+    const request = axios.delete(`${this.url}/${articleId}`);
+    return this.handleRequest(request);
   }
 
   update(articleId, params) {
-    return this.handleRequest(axios.put(`${this.url}/${articleId}`, params));
+    const request = axios.put(`${this.url}/${articleId}`, params);
+    return this.handleRequest(request);
   }
 
   create(params) {
-    return this.handleRequest(axios.post(this.url, params));
+    const request = axios.post(this.url, params);
+    return this.handleRequest(request);
   }
 
   handleRequest(request) {
