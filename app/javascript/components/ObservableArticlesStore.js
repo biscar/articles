@@ -17,56 +17,17 @@ class ObservableArticlesStore {
 
   loadArticles() {
     this.articlesApi.index({
-      'search_field': this.tableStore.search_field,
-      'search': this.tableStore.search_value,
-      'sort_field': this.tableStore.sort_field,
-      'sort_direction': this.tableStore.sort_direction,
-      'group_field': this.tableStore.group_field})
+      search_field: this.tableStore.search_field,
+      search: this.tableStore.search_value,
+      sort_field: this.tableStore.sort_field,
+      sort_direction: this.tableStore.sort_direction,
+      group_field: this.tableStore.group_field
+    })
       .then(response => {
         this.article_types = response.data.article_types;
         this.stories = response.data.stories;
         this.articles = response.data.articles;
       });
-  }
-
-  articleTypes() {
-    return this.article_types;
-  }
-
-  getStories() {
-    return this.stories;
-  }
-
-  addArticle(article) {
-    this.articles.push(article);
-  }
-
-  newArticle() {
-    var newArticle = {
-      editing: true,
-      story_id: this.defaultStory(),
-      type_code: this.defaultArticleType()
-    };
-
-    if (Array.isArray(this.articles)) {
-      this.articles.push(newArticle);
-    } {
-      const groups = Object.keys(this.articles);
-      const lastGroup = this.articles[groups[groups.length - 1]];
-      lastGroup.push(newArticle);
-    }
-  }
-
-  defaultArticleType() {
-    return Object.keys(this.article_types)[0];
-  }
-
-  defaultStory() {
-    return Object.keys(this.stories)[0];
-  }
-
-  editArticle(article) {
-    article.editing = true;
   }
 
   createArticle(article, params) {
@@ -80,6 +41,46 @@ class ObservableArticlesStore {
   updateArticle(articleId, params) {
     this.articlesApi.update(articleId, params);
   };
+
+  articleTypes() {
+    return this.article_types;
+  }
+
+  getStories() {
+    return this.stories;
+  }
+
+  getNewArticle() {
+    return  {
+      editing: true,
+      story_id: this.defaultStory(),
+      type_code: this.defaultArticleType()
+    };
+  }
+
+  newArticle() {
+    const newArticle = this.getNewArticle();
+
+    if (Array.isArray(this.articles)) {
+      this.articles.push(newArticle);
+    } else {
+      const groups = Object.keys(this.articles);
+      const lastGroup = this.articles[groups[groups.length - 1]];
+      lastGroup.push(newArticle);
+    }
+  }
+
+  defaultArticleType() {
+    return Object.keys(this.article_types).shift();
+  }
+
+  defaultStory() {
+    return Object.keys(this.stories).shift();
+  }
+
+  editArticle(article) {
+    article.editing = true;
+  }
 
   removeArticleFromStore(article_id){
     if (Array.isArray(this.articles)) {
@@ -110,7 +111,7 @@ class ObservableArticlesStore {
     if (Array.isArray(this.articles)) {
       return this.findArticleByIdInArray(this.articles, id);
     } else {
-      for (var articles of Object.values(this.articles)) {
+      for (const articles of Object.values(this.articles)) {
         const article = this.findArticleByIdInArray(articles, id);
         if (article) return article;
       }
