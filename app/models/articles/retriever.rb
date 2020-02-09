@@ -36,6 +36,7 @@ module Articles
       article_class
         .joins(:story)
         .joins(:article_type)
+        .order(:id)
     end
 
     def articles_data(articles)

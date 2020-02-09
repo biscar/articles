@@ -9,7 +9,7 @@ module Api
       end
 
       def destroy
-        Articles::Destroyer.new(params[:id]).destroy
+        Articles::Destroyer.new(permitted_destroy_params(params)).destroy
 
         render json: { status: 200 }
       end
@@ -34,6 +34,10 @@ module Api
 
       def permitted_index_params(params)
         params.permit(:search_field, :search, :sort_field, :sort_direction, :group_field).to_h.with_indifferent_access
+      end
+
+      def permitted_destroy_params(params)
+        params.permit(:id).to_h.with_indifferent_access
       end
 
     end

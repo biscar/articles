@@ -1,6 +1,5 @@
-import React, {Component} from "react";
-import ReactDOM, { render } from "react-dom";
-import MobX, { observable, action, computed, autorun } from "mobx";
+import { observable, autorun } from "mobx";
+import ArticleApi from "../services/ArticleApi";
 
 class ObservableArticlesStore {
   @observable articles = [];
@@ -9,6 +8,7 @@ class ObservableArticlesStore {
     this.article_types = {};
     this.stories = {};
     this.tableStore = tableStore;
+    this.articleApi = new ArticleApi();
 
     autorun(() => {
       this.loadArticles();
@@ -87,14 +87,19 @@ class ObservableArticlesStore {
   };
 
   removeArticle(article) {
-    $.ajax({
-      url: `/api/v1/article/${article.id}`,
-      type: 'DELETE',
-      success: () =>  {
-        this.articles.remove(article);
-      }
-    });
+    this.articleApi.destroy(article.id);
   }
+
+  removeArticleFromStore(article_id){
+    const article = this.findArticleById(article_id);
+    this.articles.remove(article);
+  }
+
+  findArticleById = (id) => {
+    return this.articles.find(function(article) {
+      return article['id'] == id;
+    });
+  };
 
   sortTable(field, sort) {
     this.tableStore.sort_field = field;
