@@ -1,12 +1,12 @@
 module Articles
   class Base
-    def initialize(params = {}, article_class: Ar::Article, story_class: Ar::Story,
-                   article_type_class: Ar::ArticleType)
+    def initialize(params = {}, article_class: Ar::Article, story_class: Ar::Story, article_type_class: Ar::ArticleType)
       @article_class = article_class
       @article_type_class = article_type_class
       @story_class = story_class
-      post_initialize(params)
       @article = nil
+      @channel_job = nil
+      post_initialize(params)
     end
 
     def post_initialize(params = {}) end

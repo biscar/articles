@@ -24,7 +24,7 @@ module Api
       end
 
       def create
-        creator = Articles::Creator.new(permitted_update_params(params))
+        creator = Articles::Creator.new(permitted_create_params(params))
         creator.create
         creator.notify_channel
 
@@ -34,6 +34,10 @@ module Api
       private
 
       def permitted_update_params(params)
+        params.permit(:id, :name, :text, :type_code, :story_id).to_h.with_indifferent_access
+      end
+
+      def permitted_create_params(params)
         params.permit(:id, :name, :text, :type_code, :story_id).to_h.with_indifferent_access
       end
 

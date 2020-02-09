@@ -1,8 +1,6 @@
 module Articles
   class Creator < Articles::Base
-    def post_initialize(params, channel_job: CreateArticleJob, article_type_class: Ar::ArticleType)
-      @article_class = article_class
-      @article_type_class = article_type_class
+    def post_initialize(params, channel_job: CreateArticleJob)
       @name = params[:name]
       @text = params[:text]
       @type_code = params[:type_code]
@@ -21,7 +19,7 @@ module Articles
       @article = article
     end
 
-    attr_reader :article, :name, :text, :type_code, :story_id, :article_type_class
+    attr_reader :name, :text, :type_code, :story_id
 
     def job_params
       article_json(article)
