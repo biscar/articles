@@ -25,10 +25,8 @@ module Articles
 
     attr_reader :articles
 
-
-
     def sort_array!(articles, field, direction)
-      articles.sort_by! { |article| article[field] }
+      articles.sort_by! { |article| article[field].to_s }
       articles.reverse! if direction == DESC
     end
 

@@ -61,7 +61,6 @@ class ObservableArticlesStore {
   newArticle() {
     const newArticle = this.getNewArticle();
 
-
     if (Array.isArray(this.articles)) {
       this.articles.push(newArticle);
     } else {
@@ -69,6 +68,8 @@ class ObservableArticlesStore {
       const lastGroup = groups.shift();
       if (!lastGroup) {
         this.articles[''] = [newArticle]
+      } else {
+        this.articles[groups[groups.length - 1]].push(newArticle);
       }
     }
   }
