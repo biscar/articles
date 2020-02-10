@@ -42,10 +42,10 @@ class ArticlesRow extends React.Component {
                                items={this.props.store.getStories()}/>
         </td>
         <td>
-          <TextControl ref={this.name} value={article.name} editing={article.editing} />
+          <TextControl rows={5} cols={20} ref={this.name} value={article.name} editing={article.editing} />
         </td>
         <td>
-          <TextControl ref={this.text} value={article.text} editing={article.editing} />
+          <TextControl rows={5} cols={100} ref={this.text} value={article.text} editing={article.editing} />
         </td>
         <td>
           <SelectControl ref={this.type} value={article.type_code} editing={article.editing}

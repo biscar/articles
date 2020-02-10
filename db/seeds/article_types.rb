@@ -1,5 +1,5 @@
 module Seeds
-  class ArticleType
+  class ArticleTypes
     TYPES = [
       ['Blog post', 'blog_post'],
       ['Facebook post', 'facebook_post'],

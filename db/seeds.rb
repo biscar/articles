@@ -1,8 +1,8 @@
-require_relative 'seeds/article_type'
-require_relative 'seeds/story'
-require_relative 'seeds/article'
+require_relative 'seeds/article_types'
+require_relative 'seeds/stories'
+require_relative 'seeds/articles'
 
-Seeds::Story.import_data
-Seeds::ArticleType.import_data
-Seeds::Article.import_data
+Seeds::Stories.import_data
+Seeds::ArticleTypes.import_data
+Seeds::Articles.import_data
 

@@ -1,5 +1,5 @@
 module Seeds
-  class Story
+  class Stories
     STORIES = %w[News Weather Sport Politics Incidents].freeze
 
     def self.import_data

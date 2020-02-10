@@ -86,7 +86,6 @@ class ObservableArticlesStore {
   }
 
   removeArticleFromStore(article_id){
-    console.log(article_id)
     if (Array.isArray(this.articles)) {
       const article = this.findArticleById(article_id);
       this.articles.remove(article);
