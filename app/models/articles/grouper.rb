@@ -9,7 +9,7 @@ module Articles
 
       grouped_articles =
         case group_field
-        when 'total_story'
+        when TOTAL_STORY
           group_by_total_story(articles)
         else
           articles.group_by { |article| article[group_field] }
@@ -19,6 +19,8 @@ module Articles
     end
 
     private
+
+    TOTAL_STORY = 'total_story'.freeze
 
     attr_reader :articles
 

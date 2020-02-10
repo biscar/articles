@@ -8,9 +8,9 @@ module Articles
       return articles if sort_field.blank? || direction.blank?
 
       case articles.class.name
-      when 'Hash'
+      when HASH
         sort_hash!(sort_field, direction)
-      when 'Array'
+      when ARRAY
         sort_array!(articles, sort_field, direction)
       end
 
@@ -19,8 +19,13 @@ module Articles
 
     private
 
-    attr_reader :articles
     DESC = 'desc'.freeze
+    HASH = 'Hash'.freeze
+    ARRAY = 'Array'.freeze
+
+    attr_reader :articles
+
+
 
     def sort_array!(articles, field, direction)
       articles.sort_by! { |article| article[field] }
