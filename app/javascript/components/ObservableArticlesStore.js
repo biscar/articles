@@ -65,8 +65,8 @@ class ObservableArticlesStore {
       this.articles.push(newArticle);
     } else {
       const groups = Object.keys(this.articles);
-      const lastGroup = groups.shift();
-      if (!lastGroup) {
+      const lastGroup = groups[0];
+      if (lastGroup === undefined) {
         this.articles[''] = [newArticle]
       } else {
         this.articles[groups[groups.length - 1]].push(newArticle);
@@ -75,11 +75,11 @@ class ObservableArticlesStore {
   }
 
   defaultArticleType() {
-    return Object.keys(this.article_types).shift();
+    return Object.keys(this.article_types)[0];
   }
 
   defaultStory() {
-    return Object.keys(this.stories).shift();
+    return Object.keys(this.stories)[0];
   }
 
   editArticle(article) {
