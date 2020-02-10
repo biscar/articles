@@ -35,7 +35,8 @@ class ArticlesApi {
   }
 
   errorHandler(error) {
-    alert(error.response);
+    console.log(error.response.statusText);
+    alert(error.response.statusText);
   }
 }
 

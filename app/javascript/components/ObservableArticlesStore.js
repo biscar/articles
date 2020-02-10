@@ -24,9 +24,11 @@ class ObservableArticlesStore {
       group_field: this.tableStore.group_field
     })
       .then(response => {
-        this.article_types = response.data.article_types;
-        this.stories = response.data.stories;
-        this.articles = response.data.articles;
+        if (response) {
+          this.article_types = response.data.article_types;
+          this.stories = response.data.stories;
+          this.articles = response.data.articles;
+        }
       });
   }
 
