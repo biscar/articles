@@ -61,12 +61,15 @@ class ObservableArticlesStore {
   newArticle() {
     const newArticle = this.getNewArticle();
 
+
     if (Array.isArray(this.articles)) {
       this.articles.push(newArticle);
     } else {
       const groups = Object.keys(this.articles);
-      const lastGroup = this.articles[groups[groups.length - 1]];
-      lastGroup.push(newArticle);
+      const lastGroup = groups.shift();
+      if (!lastGroup) {
+        this.articles[''] = [newArticle]
+      }
     }
   }
 
@@ -83,6 +86,7 @@ class ObservableArticlesStore {
   }
 
   removeArticleFromStore(article_id){
+    console.log(article_id)
     if (Array.isArray(this.articles)) {
       const article = this.findArticleById(article_id);
       this.articles.remove(article);
