@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ArticlesController < ApplicationController
+    class ArticlesController < ApiController
       def index
         json = Articles::Retriever.new(permitted_index_params(params)).retrieve_json
 
@@ -10,7 +10,6 @@ module Api
       def destroy
         destroyer = Articles::Destroyer.new(permitted_destroy_params(params))
         destroyer.destroy
-        destroyer.notify_channel
 
         render json: { status: 200 }
       end
@@ -18,7 +17,6 @@ module Api
       def update
         updater = Articles::Updater.new(permitted_update_params(params))
         updater.update
-        updater.notify_channel
 
         render json: { status: 200 }
       end
@@ -26,7 +24,6 @@ module Api
       def create
         creator = Articles::Creator.new(permitted_create_params(params))
         creator.create
-        creator.notify_channel
 
         render json: { status: 200 }
       end

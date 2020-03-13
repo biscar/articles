@@ -5,23 +5,14 @@ module Articles
       @article_type_class = article_type_class
       @story_class = story_class
       @article = nil
-      @channel_job = nil
       post_initialize(params)
     end
 
     def post_initialize(params = {}) end
 
-    def notify_channel
-      channel_job.perform_later(job_params) if channel_job
-    end
-
-    def job_params
-      {}
-    end
-
     private
 
-    attr_reader :article, :article_class, :channel_job, :article_type_class, :story_class
+    attr_reader :article, :article_class, :article_type_class, :story_class
 
     def article_json(article)
       {

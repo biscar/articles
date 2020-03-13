@@ -1,22 +1,18 @@
 import React from "react";
 import ArticlesSortHeadColumn from "./ArticlesSortHeadColumn";
 
-class ArticlesHead extends React.Component {
-  render() {
-    const store = this.props.store;
-
-    return (
+function ArticlesHead(props) {
+  return (
       <tr>
-        <ArticlesSortHeadColumn store={store} label={'Story'} column={'story'}/>
-        <ArticlesSortHeadColumn store={store} label={'Name'} column={'name'}/>
-        <ArticlesSortHeadColumn store={store} label={'Text'} column={'text'}/>
-        <ArticlesSortHeadColumn store={store} label={'Type'} column={'type'}/>
+        <ArticlesSortHeadColumn label={'Story'} column={'story'}/>
+        <ArticlesSortHeadColumn label={'Name'} column={'name'}/>
+        <ArticlesSortHeadColumn label={'Text'} column={'text'}/>
+        <ArticlesSortHeadColumn label={'Type'} column={'type'}/>
         <th scope="col">
           Actions
         </th>
       </tr>
     );
-  };
 }
 
 export default ArticlesHead;

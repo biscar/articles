@@ -1,6 +1,6 @@
 module Articles
   class Retriever < Base
-    def post_initialize(params, channel_job: CreateArticleJob, finder_class: Articles::Finder,
+    def post_initialize(params, finder_class: Articles::Finder,
                         sorter_class: Articles::Sorter, grouper_class: Articles::Grouper)
       @finder_class = finder_class
       @sorter_class = sorter_class

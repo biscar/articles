@@ -1,32 +1,34 @@
 import React from "react";
-import { observer } from "mobx-react";
 import ArticlesRow from "./ArticlesRow";
 import ArticlesHead from "./ArticlesHead";
+import NewArticle from "./NewArticle";
 import GroupRow from "./GroupRow";
+import useArticlesData from "../contexts/useArticlesData";
 
-@observer
-class ArticlesTable extends React.Component {
-  getRows = (store) => {
+function ArticlesTable(props) {
+  const { articles } = useArticlesData();
+
+  function getRows(articles) {
     let rows = [];
     let index = 0;
 
-    if (Array.isArray(store.articles)) {
-      rows = store.articles.map(
+    if (Array.isArray(articles)) {
+      rows = articles.map(
         (article) => {
           index = index + 1;
-          return <ArticlesRow store={store} article={article} key={index} />;
+          return <ArticlesRow article={article} key={index} />;
         }
       )
     }
     else {
-      for (var group in store.articles) {
+      for (var group in articles) {
         index = index + 1;
-        rows.push(<GroupRow store={store} label={group} key={index}/>);
+        rows.push(<GroupRow label={group} key={index}/>);
 
-        rows = rows.concat(store.articles[group].map((article) =>
+        rows = rows.concat(articles[group].map((article) =>
           {
             index = index + 1;
-            return <ArticlesRow store={store} article={article} key={index} />;
+            return <ArticlesRow article={article} key={index} />;
           }
         ))
       }
@@ -35,27 +37,19 @@ class ArticlesTable extends React.Component {
     return rows;
   }
 
-  onNewArticle = () => {
-    this.props.store.newArticle();
-  };
-
-  render() {
-    const store = this.props.store;
-
-    return (
-      <div>
-        <table className="table table-bordered">
-          <thead>
-            <ArticlesHead store={store}/>
-          </thead>
-          <tbody>
-            {this.getRows(store)}
-          </tbody>
-        </table>
-        <button onClick={this.onNewArticle} type="button" className="btn btn-primary">New Article</button>
-      </div>
-    );
-  };
+  return (
+    <div>
+      <table className="table table-bordered">
+        <thead>
+          <ArticlesHead />
+        </thead>
+        <tbody>
+          {getRows(articles)}
+          <NewArticle />
+        </tbody>
+      </table>
+    </div>
+  )
 }
 
 export default ArticlesTable;

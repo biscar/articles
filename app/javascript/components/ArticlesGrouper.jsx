@@ -1,8 +1,8 @@
 import React from "react";
-import SelectControl from "./SelectControl";
+import SelectControl from "./shared/SelectControl";
+import useStores from "../contexts/useStores";
 
 const items = {
-  '': 'Please select',
   story: 'Story',
   name: 'Name',
   text: 'Text',
@@ -10,16 +10,28 @@ const items = {
   total_story: 'Story with totals'
 };
 
-class ArticlesFinder extends React.Component {
-  onChange = (e) => {
-    this.props.store.groupTable(e.target.value);
+function ArticlesGrouper() {
+  const { articlesStore } = useStores();
+
+  function onChange(e) {
+    articlesStore.groupTable(e.target.value);
   }
 
-  render() {
-    return (
-      <SelectControl onChange={this.onChange} editing items={items} />
-    );
-  }
+  return (
+    <div className="container p-2">
+      <form>
+        <div id="article_finder"></div>
+        <div className="form-group row">
+          <label className="col-sm-2 col-form-label">Group by</label>
+          <div className="col-sm-5">
+            <div id="article_grouper">
+              <SelectControl onChange={onChange} editing items={items} />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
 }
 
-export default ArticlesFinder;
+export default ArticlesGrouper;

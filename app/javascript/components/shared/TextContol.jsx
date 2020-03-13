@@ -13,13 +13,10 @@ class TextControl extends React.Component {
   };
 
   render() {
-    const value = this.props.value;
-    const editing = this.props.editing;
-    const rows = this.props.rows;
-    const cols = this.props.cols;
+    const { value, editing, rows, cols } = this.props;
 
     return (
-      editing ? <textarea rows={rows} cols={cols} onChange={this.onChangeValue} defaultValue={value}></textarea> : value
+      editing ? <textarea rows={rows} cols={cols} onChange={this.onChangeValue} defaultValue={value}></textarea> : value || ''
     );
   }
 }

@@ -1,26 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
+import useStores from "../contexts/useStores";
 
-class ArticlesSortHeadColumn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+function ArticlesSortHeadColumn(props) {
+  const [value, setValue] = useState('asc');
+  const { articlesStore } = useStores();
+  const {label, column} = props;
+
+  function onChange() {
+    setValue(value === 'asc' ? 'desc' : 'asc');
+    articlesStore.sortTable(column, value);
   }
 
-  onChange = () => {
-    const order = this.state.value === 'asc' ? 'desc' : 'asc';
-    this.setState({ value: order});
-
-    this.props.store.sortTable(this.props.column, order);
-  }
-
-  render() {
-    const label = this.props.label;
-    return (
-      <th scope="col">
-        <a onClick={this.onChange} href="#" >{label}</a>
-      </th>
-    );
-  }
+  return (
+    <th scope="col">
+      <a onClick={onChange} href="#" >{label}</a>
+    </th>
+  );
 }
 
 export default ArticlesSortHeadColumn;

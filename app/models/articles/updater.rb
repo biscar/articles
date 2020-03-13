@@ -1,8 +1,7 @@
 module Articles
   class Updater < Articles::Base
-    def post_initialize(params, channel_job: UpdateArticleJob)
+    def post_initialize(params)
       @id = params[:id]
-      @channel_job = channel_job
       @name = params[:name]
       @text = params[:text]
       @type_code = params[:type_code]

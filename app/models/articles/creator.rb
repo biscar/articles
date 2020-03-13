@@ -1,11 +1,10 @@
 module Articles
   class Creator < Articles::Base
-    def post_initialize(params, channel_job: CreateArticleJob)
+    def post_initialize(params)
       @name = params[:name]
       @text = params[:text]
       @type_code = params[:type_code]
       @story_id = params[:story_id]
-      @channel_job = channel_job
     end
 
     def create

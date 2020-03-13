@@ -1,25 +1,16 @@
 import React from "react";
 
-class ArticlesActions extends React.Component {
-  onRemove = () => {
-    this.props.store.removeArticle(this.props.article);
-  };
+function ArticlesActions(props) {
+  const {edit, onEdit, onUpdate, onRemove} = props;
 
-  onEdit = () => {
-    this.props.store.editArticle(this.props.article);
-  };
-
-  render() {
-    const editing = this.props.article.editing;
-
-    return (
-      <td>
-        { this.props.article.id && <button onClick={this.onRemove} type="button" className="btn btn-danger">remove</button>}
-        { editing ? <button onClick={this.props.onUpdate} type="button" className="btn btn-success">save</button> :
-          <button onClick={this.onEdit} type="button" className="btn btn-primary">edit</button> }
-      </td>
-    );
-  }
+  return (
+    <td>
+      { <button onClick={onRemove} type="button" className="btn btn-danger">remove</button>}
+      { edit ?
+        <button onClick={onUpdate} type="button" className="btn btn-success">save</button> :
+        <button onClick={onEdit} type="button" className="btn btn-primary">edit</button> }
+    </td>
+  );
 }
 
 export default ArticlesActions;

@@ -1,18 +1,15 @@
 import React from "react";
 
-class GroupRow extends React.Component {
+function GroupRow(props) {
+  const label = props.label;
 
-  render() {
-    const label = this.props.label;
-
-    return (
-      <tr>
-        <td className="table-primary" colSpan={5}>
-          {label}
-        </td>
-      </tr>
-    );
-  }
+  return (
+    <tr>
+      <td className="table-primary" colSpan={5}>
+        {label}
+      </td>
+    </tr>
+  );
 }
 
 export default GroupRow;

@@ -1,15 +1,1 @@
-<div class="container p-2">
-  <form>
-    <div id="article_finder"></div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Group by</label>
-      <div class="col-sm-5">
-        <div id="article_grouper"></div>
-      </div>
-    </div>
-  </form>
-</div>
-
-<div class="p-2" id="articles"></div>
-
-<%= javascript_pack_tag 'articles' %>
+<%= react_component('App') %>
