@@ -9,7 +9,7 @@ class TextControl extends React.Component {
   }
 
   onChangeValue = (e) => {
-    this.setState({value: e.target.value});
+    this.setState({ value: e.target.value });
   };
 
   render() {

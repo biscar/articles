@@ -40,7 +40,7 @@ module Articles
     end
 
     def total_story_label(story, type, articles_count, last_article)
-      "#{story}, #{type}(#{articles.count} count), Last created article #{last_article[:created_at].strftime('%Y/%m/%d %l:%M')}"
+      "#{story}, #{type}(#{articles_count} count), Last created article #{last_article[:created_at].strftime('%Y/%m/%d %l:%M')}"
     end
   end
 end

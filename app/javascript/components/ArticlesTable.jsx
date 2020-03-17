@@ -14,18 +14,18 @@ function ArticlesTable(props) {
 
     if (Array.isArray(articles)) {
       rows = articles.map(
-        (article) => {
+        article => {
           index = index + 1;
           return <ArticlesRow article={article} key={index} />;
         }
       )
     }
     else {
-      for (var group in articles) {
+      for (let group in articles) {
         index = index + 1;
         rows.push(<GroupRow label={group} key={index}/>);
 
-        rows = rows.concat(articles[group].map((article) =>
+        rows = rows.concat(articles[group].map(article =>
           {
             index = index + 1;
             return <ArticlesRow article={article} key={index} />;

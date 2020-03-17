@@ -4,7 +4,7 @@ import useArticlesData from "../contexts/useArticlesData";
 import SelectControl from "./shared/SelectControl";
 import TextControl from "./shared/TextContol";
 
-function NewArticle(props) {
+function NewArticle() {
   const { articlesStore } = useStores();
   const { articleTypes, stories } = useArticlesData();
 

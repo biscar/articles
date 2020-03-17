@@ -20,7 +20,6 @@ function ArticlesGrouper() {
   return (
     <div className="container p-2">
       <form>
-        <div id="article_finder"></div>
         <div className="form-group row">
           <label className="col-sm-2 col-form-label">Group by</label>
           <div className="col-sm-5">

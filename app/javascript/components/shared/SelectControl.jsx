@@ -8,7 +8,7 @@ class SelectControl extends React.Component {
   }
 
   handleChangeValue = (e) => {
-    this.setState({value: e.target.value});
+    this.setState({ value: e.target.value });
   };
 
   findValueByKey = (key, items) => {
